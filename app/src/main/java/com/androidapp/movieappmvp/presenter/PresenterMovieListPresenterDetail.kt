@@ -93,14 +93,14 @@ class PresenterMovieListPresenterDetail : MvpPresenter<ViewMovieList>(), ViewPre
                     Log.v(ClassKey.LOG_KEY, "Error in deleteMovieLike(): ${it.message}")
                 }))
         } else {
-            getMovieLikeInDB(movies)
+            putMovieLikeInDB(movies)
         }
     }
 
-    private fun getMovieLikeInDB(movies: Movie) {
-        cache.putCacheMoviesLike(movies)
+    private fun putMovieLikeInDB(movies: Movie) {
+        disposable.add(cache.putCacheMoviesLike(movies)
             .observeOn(mainThreadScheduler)
-            .subscribe()
+            .subscribe())
     }
 
     fun backPressed(): Boolean {
