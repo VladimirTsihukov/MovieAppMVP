@@ -46,13 +46,12 @@ class PresenterMovieListPresenterDetail : MvpPresenter<ViewMovieList>(), ViewPre
     }
 
     fun loadMovies(typeMovie: EnumTypeMovie) {
-        flagMovieFavorite = typeMovie.name == EnumTypeMovie.FAVORITE.name
+        flagMovieFavorite = typeMovie == EnumTypeMovie.FAVORITE
         loadMoviesType(typeMovie)
     }
 
-
     private fun loadMoviesType(typeMovie: EnumTypeMovie) {
-        if (typeMovie.name == EnumTypeMovie.FAVORITE.name) {
+        if (typeMovie == EnumTypeMovie.FAVORITE) {
             loadMoviesFavorite()
         } else {
             disposable.add(retrofitLoadMovies.loadMovieInServer(typeMovie)
